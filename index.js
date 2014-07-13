@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 'use strict';
-var nomnom    = require( 'nomnom' ),
+
+var nomnom      = require( 'nomnom' ),
     fs          = require( 'fs' ),
     xml2js      = require( 'xml2js' ),
     easyzip     = require( 'easy-zip' ).EasyZip;
@@ -112,4 +113,5 @@ if( dir ) {
 } else {
 
   console.log('yo, you need a directory, son...');
+
 }
