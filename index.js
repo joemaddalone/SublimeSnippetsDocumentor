@@ -10,16 +10,24 @@ var nomnom      = require( 'nomnom' ),
 var parser = new xml2js.Parser(),
     ARGS       = nomnom.parse(),
     dir        = ARGS.d || process.cwd(),  // optional source directory
-    md         = ARGS.md || 'README', // optional markdown filename
-    p          = ARGS.p;  // optional package name
+    md         = ARGS.md || 'README',      // optional markdown filename
+    p          = ARGS.p;                   // optional package name
 
 
 var walk = function ( dir, done ) {
+
   var results = [];
 
   fs.readdir( dir, function ( err, list ) {
+
     if ( err ) return done( err );
+
+    list.sort( function( a, b ) {
+        return a < b ? -1 : 1;
+    } );
+
     var i = 0;
+
 
     (function next() {
 
@@ -38,11 +46,11 @@ var walk = function ( dir, done ) {
 
             next();
 
-          });
+          } );
 
         } else {
 
-          if(file.indexOf('sublime-snippet') > -1){
+          if( file.indexOf( 'sublime-snippet' ) > -1 ){
 
             results.push( file );
 
@@ -51,12 +59,17 @@ var walk = function ( dir, done ) {
           next();
 
         }
+
       } );
+
     } )();
+
   } );
+
 };
 
 var walker = function( dir, md ){
+
   walk( dir, function ( err, results ) {
     if ( err ) throw err;
 
@@ -85,6 +98,7 @@ var walker = function( dir, md ){
     console.log('PROCESS COMPLETED!');
 
   } );
+
 };
 
 
@@ -94,11 +108,17 @@ if( dir ) {
   console.log('Compiling %s', dir);
 
   if( p ){
+
     var zip = new easyzip();
+
     zip.zipFolder( dir, function(){
-      zip.writeToFile( p + '.zip' );
+
+      zip.writeToFile( p + '.sublime-package' );
+
       console.log( 'Rendered Package' );
+
     } );
+
   }
 
 
