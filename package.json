@@ -1,0 +1,30 @@
+{
+  "name": "compilesnippets",
+  "version": "0.0.1",
+  "preferGlobal": true,
+  "description": "Documents and packages Sublime snippets",
+  "main": "index.js",
+  "bin":{
+      "snippetdoc": "index.js"
+    },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joemaddalone/SublimeSnippetsDocumentor.git"
+  },
+  "author": "Joe Maddalone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joemaddalone/SublimeSnippetsDocumentor/issues"
+  },
+  "homepage": "https://github.com/joemaddalone/SublimeSnippetsDocumentor",
+  "dependencies": {
+    "easy-zip": "0.0.4",
+    "nomnom": "^1.8.0",
+    "request": "^2.37.0",
+    "xml2js": "^0.4.4",
+    "yargs": "^1.2.6"
+  }
+}
