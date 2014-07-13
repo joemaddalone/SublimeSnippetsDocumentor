@@ -5,7 +5,7 @@
   "description": "Documents and packages Sublime snippets",
   "main": "index.js",
   "bin":{
-      "snippetdoc": "index.js"
+      "compilesnippets": "index.js"
     },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
