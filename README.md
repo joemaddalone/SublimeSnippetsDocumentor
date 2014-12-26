@@ -12,11 +12,15 @@ It can also generate a *.sublime-package file from your snippets for use with ST
 ## Installation
 
     npm install compilesnippets -g
-    
+
+## Test
+
+    npm test
+
 ## Usage
 
     compilesnippets --d "SnippetsDirectory" --md "MD Filename" --p "Package name"
-    
+
 ###Note
 
 All flags are optional,

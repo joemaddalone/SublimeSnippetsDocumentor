@@ -1,6 +1,6 @@
 {
   "name": "compilesnippets",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "preferGlobal": true,
   "description": "Documents and packages Sublime snippets",
   "main": "index.js",
@@ -8,7 +8,7 @@
       "compilesnippets": "index.js"
     },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js --d 'TestSnippets' --md 'TestSnippets' --p 'TestSnippets'"
   },
   "repository": {
     "type": "git",
