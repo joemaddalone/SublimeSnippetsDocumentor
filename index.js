@@ -8,13 +8,43 @@ var nomnom      = require( 'nomnom' ),
     easyzip     = require( 'easy-zip' ).EasyZip;
 
 var parser = new xml2js.Parser(),
-    ARGS       = nomnom.parse(),
-    dir        = process.cwd(),  // optional source directory
-    md         = ARGS.md || 'README',      // optional markdown filename
-    p          = ARGS.p;                   // optional package name
+    ARGS = nomnom
+    .option('package', {
+      abbr: 'p',
+      help: 'Compile package name for ST3.  [process.cwd()]'
+    } )
+    .option('directory', {
+      abbr: 'd',
+      help: 'Source directory where snippets are located'
+    } )
+    .option('markdown', {
+      abbr: 'md',
+      default: 'README',
+      help: 'Markdown filename'
+    } )
+    .option('output', {
+      abbr: 'o',
+      help: 'Directory to output generate files to. [process.cwd()]'
+    } )
+    .option('title', {
+      abbr: 't',
+      default: 'Snippets for Sublime Text',
+      help: 'Title to include in markdown file'
+    } )
+    .option('nopackage', {
+      flag: true,
+      help: 'Do not create ST3 package'
+    })
+    .parse(),
+    sourceDirectory = process.cwd(),
+    outputDirectory = process.cwd();
 
-if(ARGS.d){
-  dir = dir + '/' + ARGS.d;
+if(ARGS.directory){
+  sourceDirectory = sourceDirectory + '/' + ARGS.directory;
+}
+
+if(ARGS.output){
+  outputDirectory = outputDirectory + '/' + ARGS.output;
 }
 
 var walk = function ( dir, done ) {
@@ -72,25 +102,24 @@ var walker = function( dir, md ){
 
 
 
-if( dir ) {
-  console.log('Compiling %s', dir);
-  if( p ){
+
+console.log('Compiling %s', sourceDirectory);
+if(!ARGS.nopackage){
+  if( ARGS.package ){
     var zip = new easyzip();
-    zip.zipFolder( dir, function(){
-      zip.writeToFile( p + '.sublime-package' );
+    zip.zipFolder( sourceDirectory, function(){
+      zip.writeToFile( outputDirectory + '/' + ARGS.package + '.sublime-package' );
       console.log( 'Rendered Package' );
     } );
   }
-
-
-  fs.writeFile( md + '.md', 'Snippets for Sublime Text' +
-    '\n=================================\n' +
-    'Trigger | Description\n' +
-    ':------- | :-------\n'
-  );
-
-  walker(dir, md);
-
-} else {
-  console.log('yo, you need a directory, son...');
 }
+
+
+
+fs.writeFile( outputDirectory + '/' + ARGS.markdown + '.md', ARGS.title +
+  '\n=================================\n' +
+  'Trigger | Description\n' +
+  ':------- | :-------\n'
+);
+
+walker(sourceDirectory, outputDirectory + '/' + ARGS.markdown);
