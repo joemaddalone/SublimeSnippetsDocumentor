@@ -1,6 +1,6 @@
 {
   "name": "compilesnippets",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "preferGlobal": true,
   "description": "Documents and packages Sublime snippets",
   "main": "index.js",
@@ -23,7 +23,6 @@
   "dependencies": {
     "easy-zip": "0.0.4",
     "nomnom": "^1.8.0",
-    "request": "^2.37.0",
     "xml2js": "^0.4.4"
   }
 }
