@@ -35,9 +35,18 @@ var parser = new xml2js.Parser(),
       flag: true,
       help: 'Do not create ST3 package'
     })
+    .option('nomd', {
+      flag: true,
+      help: 'Do not create README'
+    })
     .parse(),
     sourceDirectory = process.cwd(),
     outputDirectory = process.cwd();
+
+if(ARGS.nomd && ARGS.nopackage){
+  console.log('My work here is done.')
+  process.exit()
+}
 
 if(ARGS.directory){
   sourceDirectory = sourceDirectory + '/' + ARGS.directory;
@@ -114,12 +123,11 @@ if(!ARGS.nopackage){
   }
 }
 
-
-
-fs.writeFile( outputDirectory + '/' + ARGS.markdown + '.md', ARGS.title +
-  '\n=================================\n' +
-  'Trigger | Description\n' +
-  ':------- | :-------\n'
-);
-
-walker(sourceDirectory, outputDirectory + '/' + ARGS.markdown);
+if(!ARGS.nomd){
+  fs.writeFile( outputDirectory + '/' + ARGS.markdown + '.md', ARGS.title +
+    '\n=================================\n' +
+    'Trigger | Description\n' +
+    ':------- | :-------\n'
+  );
+  walker(sourceDirectory, outputDirectory + '/' + ARGS.markdown);
+}

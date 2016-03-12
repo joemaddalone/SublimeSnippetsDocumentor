@@ -25,6 +25,7 @@ It can also generate a *.sublime-package file from your snippets for use with ST
    -o, --output      Directory to output generate files to. [process.cwd()]
    -t, --title       Title to include in markdown file  [Snippets for Sublime Text]
    --nopackage       Do not create ST3 package
+   --nomd            Do not create markdown file
 ```
 ## Usage
 
